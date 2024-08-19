@@ -1,12 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Home from '../views/Home.vue'; // Ensure this path is correct
-import Login from '../component/Login.vue'; // Ensure this path is correct
-import Register from '../component/Register.vue'; // Ensure this path is correct
+import Home from '../views/Home.vue';
+import Login from '../components/Login.vue';
+import Register from '../components/Register.vue';
+import DrawingCanvas from '../components/DrawingCanvas.vue'; // Add this import
 
 const routes = [
   { path: '/', component: Home },
   { path: '/login', component: Login },
-  { path: '/register', component: Register }
+  { path: '/register', component: Register },
+  { path: '/drawing', component: DrawingCanvas } // Add this route
 ];
 
 const router = createRouter({

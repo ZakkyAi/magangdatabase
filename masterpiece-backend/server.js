@@ -31,6 +31,7 @@ app.post('/register', async (req, res) => {
     );
     res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
+    console.error('Error registering user:', error);
     res.status(500).json({ error: 'Error registering user' });
   }
 });
@@ -56,13 +57,14 @@ app.post('/login', async (req, res) => {
       res.status(401).json({ error: 'Invalid credentials' });
     }
   } catch (error) {
+    console.error('Error logging in:', error);
     res.status(500).json({ error: 'Error logging in' });
   }
 });
 
 // Middleware to verify JWT token
 const verifyToken = (req, res, next) => {
-  const token = req.headers['authorization'];
+  const token = req.headers['authorization']?.split(' ')[1]; // Extract token from 'Bearer token' format
   if (!token) return res.status(403).json({ error: 'No token provided' });
   
   jwt.verify(token, SECRET_KEY, (err, decoded) => {
@@ -82,6 +84,7 @@ app.post('/drawings', verifyToken, async (req, res) => {
     );
     res.status(201).json({ message: 'Drawing saved successfully', id: result.insertId });
   } catch (error) {
+    console.error('Error saving drawing:', error);
     res.status(500).json({ error: 'Error saving drawing' });
   }
 });
@@ -95,6 +98,7 @@ app.get('/drawings', verifyToken, async (req, res) => {
     );
     res.json(rows);
   } catch (error) {
+    console.error('Error retrieving drawings:', error);
     res.status(500).json({ error: 'Error retrieving drawings' });
   }
 });
@@ -112,6 +116,7 @@ app.get('/drawings/:id', verifyToken, async (req, res) => {
       res.status(404).json({ error: 'Drawing not found' });
     }
   } catch (error) {
+    console.error('Error retrieving drawing:', error);
     res.status(500).json({ error: 'Error retrieving drawing' });
   }
 });

@@ -1,14 +1,13 @@
 <template>
-  <div id="app">
-    <nav>
-      <router-link to="/" v-if="isLoggedIn">Home</router-link> |
-      <router-link to="/login" v-if="!isLoggedIn">Login</router-link> |
-      <router-link to="/register" v-if="!isLoggedIn">Register</router-link> |
-      <a href="#" @click.prevent="logout" v-if="isLoggedIn">Logout</a>
-    </nav>
-    <router-view />
+  <div>
+    <router-link to="/">Home</router-link>
+    <router-link to="/login">Login</router-link>
+    <router-link to="/register">Register</router-link>
+    <router-link to="/drawing">Drawing Canvas</router-link>
+    <router-view></router-view>
   </div>
 </template>
+
 
 <script>
 export default {
